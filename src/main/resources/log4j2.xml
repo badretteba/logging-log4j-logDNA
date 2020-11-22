@@ -43,8 +43,8 @@
                smtpHost="smtp.gmail.com"
                smtpPort="465"
                smtpProtocol="smtps"
-               smtpUsername="badr.etteba.astronomer@gmail.com"
-               smtpPassword="#Chemindefer1986"
+               smtpUsername="put your email here"
+               smtpPassword="put paasword here"
                bufferSize="1">
              <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
              <PatternLayout>
