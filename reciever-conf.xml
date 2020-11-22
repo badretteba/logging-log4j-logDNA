@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
+    <plugin class="org.apache.log4j.chainsaw.vfs.VFSLogFilePatternReceiver" name="log4j2ChainsawBadr (2)-receiver">
+        <param name="appendNonMatches" value="true"/>
+        <param name="autoReconnect" value="false"/>
+        <param name="fileURL" value="F:/Cours ISGA/5 anne/J2EE/logging/output.log"/>
+        <param name="logFormat" value="TIMESTAMP [THREAD] LEVEL LOGGER - MESSAGE"/>
+        <param name="name" value="log4j2ChainsawBadr (2)-receiver"/>
+        <param name="promptForUserInfo" value="false"/>
+        <param name="tailing" value="true"/>
+        <param name="timestampFormat" value="HH:mm:ss.SSS"/>
+        <param name="waitMillis" value="2000"/>
+    </plugin>
+</log4j:configuration>

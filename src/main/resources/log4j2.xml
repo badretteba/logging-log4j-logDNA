@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="ALL" monitorInterval="30" advertiser="multicastdns">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+        </Property>
+    </Properties>
+    <Appenders>
+
+        <!-- <File name="log4j2ChainsawBadr" fileName="output.log" bufferedIO="false" advertiseURI="F:/Cours ISGA/5 anne/J2EE/logging/output.log" advertise="true">
+         <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %m"/>
+         </File>
+         <File name="xmlLayoutForChainsaw" fileName="output.xml" bufferedIO="false" >
+             <XmlLayout/>
+         </File>-->
+         <!-- <Socket name="socket" host="localhost" port="4445">
+            <SerializedLayout />
+        </Socket>  -->
+
+        <!--  <File name="file" fileName="logs/log4j2-demo.log">
+             <PatternLayout>
+                 <Pattern>%p %t %c - %m%n</Pattern>
+             </PatternLayout>
+         </File>-->
+        <!--  Rolling File Appender -->
+        <!-- <RollingFile name="FileAppender" fileName="logs/log4j2-demo.log"
+                    filePattern="logs/log4j2-demo-%d{yyyy-MM-dd}-%i.log">
+           <PatternLayout>
+               <Pattern>${LOG_PATTERN}</Pattern>
+           </PatternLayout>
+           <Policies>
+               <SizeBasedTriggeringPolicy size="10MB" />
+           </Policies>
+           <DefaultRolloverStrategy max="10"/>
+         <TimeBasedTriggeringPolicy interval="1" />
+        </RollingFile> -->
+
+     <!-- SMTP Appender -->
+         <SMTP name="MailAppender"
+               subject="Log4j2 Demo [PROD]"
+               to="badrettebaa@gmail.com"
+               from="log4j2-demo-alerts@example.com"
+               smtpHost="smtp.gmail.com"
+               smtpPort="465"
+               smtpProtocol="smtps"
+               smtpUsername="badr.etteba.astronomer@gmail.com"
+               smtpPassword="#Chemindefer1986"
+               bufferSize="1">
+             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+             <PatternLayout>
+                 <Pattern>${LOG_PATTERN}</Pattern>
+             </PatternLayout>
+         </SMTP>
+        <!-- logdna Appender -->
+        <LogDNAAppender name="LogDNA">
+            <token>6d55cbdc2a0d466dfeb27d41e2aeda55</token>
+            <appName>LogDNA-Log4j2-Test</appName>
+            <includeStacktrace>true</includeStacktrace>
+            <sendMDC>true</sendMDC>
+            <PatternLayout pattern="%date %level method: %class{1}.%method (%file:%line) - %message%n"/>
+        </LogDNAAppender>
+
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <!-- <AsyncLogger name="com.example.log4j2demo" level="debug" additivity="false">
+        put the asyn loggers here
+        </AsyncLogger>-->
+        <Logger name="com.log4j" level="all" additivity="false">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="MailAppender" level="debug" />
+        </Logger>
+
+        <Logger name="org.springframework.boot" level="error" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="MailAppender" level="debug" />
+        </Logger>
+
+        <Root level="ALL">
+
+            <AppenderRef ref="LogDNA" level="ERROR"/>
+            <AppenderRef ref="MailAppender" />
+            <AppenderRef ref="ConsoleAppender" />
+
+            <!-- <AppenderRef ref="FileAppender"/> -->
+        </Root>
+    </Loggers>
+</Configuration>
