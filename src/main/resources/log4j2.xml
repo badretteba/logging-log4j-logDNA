@@ -38,7 +38,7 @@
      <!-- SMTP Appender -->
          <SMTP name="MailAppender"
                subject="Log4j2 Demo [PROD]"
-               to="badrettebaa@gmail.com"
+               to="example@gmail.com"
                from="log4j2-demo-alerts@example.com"
                smtpHost="smtp.gmail.com"
                smtpPort="465"
@@ -59,12 +59,28 @@
             <sendMDC>true</sendMDC>
             <PatternLayout pattern="%date %level method: %class{1}.%method (%file:%line) - %message%n"/>
         </LogDNAAppender>
-
+   <!-- send logs to DB-->     
+<!--<appender name="DB" class="org.apache.log4j.jdbc.JDBCAppender">
+   <param name="url" value="jdbc:mysql://localhost/DBNAME"/>
+   <param name="driver" value="com.mysql.jdbc.Driver"/>
+   <param name="user" value="user_id"/>
+   <param name="password" value="password"/>
+   <param name="sql" value="INSERT INTO LOGS VALUES('%x','%d','%C','%p','%m')"/>
+   
+   <layout class="org.apache.log4j.PatternLayout">
+   </layout>
+</appender> -->    
         <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
             <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
     </Appenders>
     <Loggers>
+        
+        <!-- logger for DB if juste readin DB logs not storing logs to DB -->
+        <!-- Logger name="org.hibernate.SQL" level="debug" /-->
+        <!-- Logger name="org.hibernate.type" level="trace" /-->
+    
+
         <!-- <AsyncLogger name="com.example.log4j2demo" level="debug" additivity="false">
         put the asyn loggers here
         </AsyncLogger>-->
